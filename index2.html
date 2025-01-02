@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Combat Robotics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #121212; /* Matte Black */
+            color: #ffffff;
+        }
+        header {
+            background: linear-gradient(90deg, #2c2c2c, #121212);
+            padding: 20px;
+            text-align: center;
+        }
+        #header-title {
+            display: none; /* Removed the text for image placement */
+        }
+        #header-image {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #1a1a1a;
+            padding: 15px 30px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+        nav img {
+            height: 50px;
+            margin-right: auto;
+        }
+        nav a {
+            color: #e50914;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s, transform 0.3s;
+            margin-left: 20px;
+        }
+        nav a:hover {
+            color: #ffffff; /* Changed text color on hover to golden yellow */
+            transform: translateY(-5px); /* Pop-out effect */
+        }
+        section {
+            padding: 40px;
+            margin: 20px;
+            background: #1a1a1a;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+        section h1, section h2 {
+            color: #e50914;
+        }
+        .box-container {
+            display: grid;
+            gap: 20px;
+        }
+        .bot-section, .competition-section {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        .team-section {
+            grid-template-columns: repeat(5, 1fr);
+        }
+        .sponsorship-section {
+            grid-template-columns: repeat(4, 1fr);
+        }
+        .box {
+            background: #2c2c2c;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .box img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        .box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2); /* Monochrome shadow for all non-sponsorship boxes */
+        }
+        .sponsorship-section .box:hover {
+            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.7); /* Golden shadow for sponsorship boxes */
+        }
+        .feedback-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .feedback-form input, .feedback-form textarea, .feedback-form button {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+        .feedback-form input, .feedback-form textarea {
+        background: transparent; /* Transparent background */
+        color: #ffffff; /* Text color */
+        border: 1px solid #ffffff; /* White border for visibility */
+        padding: 10px;
+         border-radius: 5px;
+        font-size: 1em;
+        }
+
+        .feedback-form input:focus, .feedback-form textarea:focus {
+        outline: none;
+        border: 1px solid #e50914; /* Red border on focus */
+        background: rgba(0, 0, 0, 0.5); /* Optional: Slight dark overlay when focused */
+        }
+
+        .feedback-form button {
+            background: #e50914;
+            color: #ffffff;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .feedback-form button:hover {
+            background: #b40812;
+        }
+        #contact {
+            background: url('images/maps-image.png') no-repeat center center/cover;
+            padding: 60px 20px;
+            color: #ffffff;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #1a1a1a;
+            color: #ffffff;
+        }
+        footer a {
+            margin-left: 10px;
+            color: #e50914;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+        .team-section .box h3 {
+            margin-top: 5px;
+            color: rgba(255, 255, 255, 0.8); /* Monochrome-style shade for position text */
+            font-size: 0.9em;
+            font-weight: normal;
+        }
+        .timeline {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px;
+}
+.timeline-item {
+    position: relative;
+    padding-left: 40px;
+}
+.timeline-item h2 {
+    color: #e50914;
+}
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    background: #e50914;
+    border-radius: 50%;
+}
+.counters {
+    text-align: center;
+    margin: 20px;
+}
+.counter {
+    font-size: 3em;
+    color: #e50914;
+}
+#leaderboard {
+    margin: 40px auto;
+    padding: 20px;
+    text-align: center;
+    background: #1a1a1a;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    max-width: 90%;
+}
+
+#leaderboard h1 {
+    color: #e50914;
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+#leaderboard table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+#leaderboard th, #leaderboard td {
+    padding: 15px;
+    text-align: left;
+    border: 1px solid #ffffff;
+    color: #ffffff;
+}
+
+#leaderboard th {
+    background: #e50914;
+    color: #ffffff;
+    font-size: 1.2em;
+    text-transform: uppercase;
+}
+
+#leaderboard tr:nth-child(even) {
+    background: #2c2c2c;
+}
+
+#leaderboard tr:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transition: background 0.3s ease-in-out;
+}
+
+#leaderboard td {
+    font-size: 1em;
+}
+
+#leaderboard td:nth-child(3) {
+    text-align: center; /* Center-align the Rank column */
+    font-weight: bold;
+    color: #e50914; /* Highlight rank in red */
+}
+
+#leaderboard td:nth-child(4) {
+    text-align: center; /* Center-align the Award column */
+    font-style: italic;
+}
+
+#searchBar {
+    margin: 20px auto;
+    padding: 10px;
+    width: 90%;
+    max-width: 400px;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+    font-size: 1em;
+    background: transparent;
+    color: #ffffff;
+    outline: none;
+}
+
+#searchBar::placeholder {
+    color: #888888;
+}
+
+#leaderboard th {
+    cursor: pointer;
+}
+
+#leaderboard th.asc::after {
+    content: ' ▲';
+}
+
+#leaderboard th:not(.asc)::after {
+    content: ' ▼';
+}
+/* Logo Styling */
+#logo {
+    position: relative;
+    z-index: 10;
+    display: block;
+    margin: 20px auto;
+    max-width: 200px;
+}
+
+/* Team Name Styling */
+#team-name {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    margin-top: 20px;
+}
+
+#team-name img {
+    max-width: 400px;
+}
+
+/* Particle Background */
+#particle-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70; /* Ensure particles don't overlap the team name */
+    z-index: 5;
+    background: #121212;
+    overflow: hidden;
+}
+
+/* Main Content */
+#main-content {
+    margin-top: 72vh;
+    padding: 20px;
+    background: #1a1a1a;
+    color: #ffffff;
+}
+
+
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <img id="header-image" src="images/header-image.png" alt="Team Combat Robotics">
+    </header>
+    <div id="team-name">
+        <img id="header-image" src="images/header-image.png" alt="Team Combat Robotics">
+    </div>
+    
+        <!-- Particle Animation -->
+        <div id="particle-background"></div>
+    
+        <!-- Main Content -->
+        <section id="main-content">
+            <h1>Welcome to Team Combat Robotics</h1>
+            <p>Your awesome content starts here...</p>
+        </section>
+    
+    
+    <nav>
+        <img id="college-symbol" src="images/college-symbol.png" alt="College Symbol">
+        <div>
+            <a href="#about">About Us</a>
+            <a href="#projects">Projects</a>
+            <a href="#competitions">Competitions</a>
+            <a href="#team">Team</a>
+            <a href="#sponsorship">Sponsorship</a>
+            <a href="#contact">Contact</a>
+            <a href="gallery.html" target="_self">Gallery</a>
+
+        </div>
+    </nav>
+
+    <section id="about">
+        <h1>About Us</h1>
+        <p>Team Combat Robotics is a student-led project from MIT, Manipal. Our mission is to design and build innovative combat robots that dominate in both national and international arenas. TEAM COMBAT ROBOTICS founded in 2018, is a team of enthusiast undergraduate students from different factions of engineering, working on building efficient combat capable robots. TCR has built the first horizontal bar spinning robot in southern India. Working with different sub-system, TCR manages to design, build and put together mechanical and electrical aspects of the bot in its own workshops.</p>
+    </section>
+
+    <section id="projects">
+        <h1>Projects</h1>
+        <div class="box-container bot-section">
+            <div class="box">
+                <img id="bot1-image" src="images/bot1-image.jpg" alt="Bot 1">
+                <h2>Bloodmoon</h2>
+                <p>It proudly secured a 3rd place podium finish at the 15kg Robowars event during the prestigious 'Quark'24' tech fest hosted by Birla Institute of Technology, Goa Campus. The bot, 'Bloodmoon', along with our exceptional team demonstrated extraordinary skills and dedication, earning us this honor.
+                    Winning the trophy and a prize of Rs. 10,000/- is a testament to our hard work. </p>
+            </div>
+            <div class="box">
+                <img src="<bot2-image>.jpg" alt="Bot 2">
+                <h2>Bot 2</h2>
+                <p>Text about Bot 2</p>
+            </div>
+            <div class="box">
+                <img src="<bot3-image>.jpg" alt="Bot 3">
+                <h2>Bot 3</h2>
+                <p>Text about Bot 3</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="competitions">
+        <h1>Competitions</h1>
+        <div class="box-container competition-section">
+            <div class="box">
+                <img src="<competition1-image>.jpg" alt="Competition 1">
+                <h2>Competition 1</h2>
+                <p>Text about Competition 1</p>
+            </div>
+            <div class="box">
+                <img src="<competition2-image>.jpg" alt="Competition 2">
+                <h2>Competition 2</h2>
+                <p>Text about Competition 2</p>
+            </div>
+            <div class="box">
+                <img src="<competition3-image>.jpg" alt="Competition 3">
+                <h2>Competition 3</h2>
+                <p>Text about Competition 3</p>
+            </div>
+            <div class="box">
+                <img src="<competition4-image>.jpg" alt="Competition 4">
+                <h2>Competition 4</h2>
+                <p>Text about Competition 4</p>
+            </div>
+            <div class="box">
+                <img src="<competition5-image>.jpg" alt="Competition 5">
+                <h2>Competition 5</h2>
+                <p>Text about Competition 5</p>
+            </div>
+            <div class="box">
+                <img src="<competition6-image>.jpg" alt="Competition 6">
+                <h2>Competition 6</h2>
+                <p>Text about Competition 6</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="team">
+        <h1>Our Team</h1>
+        <div class="box-container team-section">
+            <div class="box">
+                <img id="member1-image" src="images/member1-image.jpg" alt="Member 1">
+                <h2>Dhyey Patel</h2>
+                <h3>Manager (to be)</h3>
+                <p>Ha bhai pata hai taskphase me hu abhi isliye "to be" likha hai,so chill karo</p>
+            </div>
+            <div class="box">
+                <img src="<member2-image>.jpg" alt="Member 2">
+                <h2>Member 2</h2>
+                <h3>Position 2</h3>
+                <p>Text about Member 2</p>
+            </div>
+            <div class="box">
+                <img src="<member3-image>.jpg" alt="Member 3">
+                <h2>Member 3</h2>
+                <h3>Position 3</h3>
+                <p>Text about Member 3</p>
+            </div>
+            <div class="box">
+                <img src="<member4-image>.jpg" alt="Member 4">
+                <h2>Member 4</h2>
+                <h3>Position 4</h3>
+                <p>Text about Member 4</p>
+            </div>
+            <div class="box">
+                <img src="<member5-image>.jpg" alt="Member 5">
+                <h2>Member 5</h2>
+                <h3>Position 5</h3>
+                <p>Text about Member 5</p>
+            </div>
+            <div class="box">
+                <img src="<member6-image>.jpg" alt="Member 6">
+                <h2>Member 6</h2>
+                <h3>Position 6</h3>
+                <p>Text about Member 6</p>
+            </div>
+            <div class="box">
+                <img src="<member7-image>.jpg" alt="Member 7">
+                <h2>Member 7</h2>
+                <h3>Position 7</h3>
+                <p>Text about Member 7</p>
+            </div>
+            <div class="box">
+                <img src="<member8-image>.jpg" alt="Member 8">
+                <h2>Member 8</h2>
+                <h3>Position 8</h3>
+                <p>Text about Member 8</p>
+            </div>
+            <div class="box">
+                <img src="<member9-image>.jpg" alt="Member 9">
+                <h2>Member 9</h2>
+                <h3>Position 9</h3>
+                <p>Text about Member 9</p>
+            </div>
+            <div class="box">
+                <img src="<member10-image>.jpg" alt="Member 10">
+                <h2>Member 10</h2>
+                <h3>Position 10</h3>
+                <p>Text about Member 10</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="sponsorship">
+        <h1>Sponsorship</h1>
+        <div class="box-container sponsorship-section">
+            <div class="box">
+                <img id="sponsor1-image" src="images/sponsor1-image.jpg" alt="Sponsor 1">
+                <h2>Ingenium Drives</h2>
+            </div>
+            <div class="box">
+                <img src="<sponsor2-image>.jpg" alt="Sponsor 2">
+                <h2>Sponsor 2</h2>
+            </div>
+            <div class="box">
+                <img src="<sponsor3-image>.jpg" alt="Sponsor 3">
+                <h2>Sponsor 3</h2>
+            </div>
+            <div class="box">
+                <img src="<sponsor4-image>.jpg" alt="Sponsor 4">
+                <h2>Sponsor 4</h2>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h1>Contact Us</h1>
+        <form class="feedback-form">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea rows="5" placeholder="Your Feedback" required></textarea>
+            <button type="submit">Submit</button>
+        </form>
+    </section>
+    <section id="timeline">
+        <h1>Our Journey</h1>
+        <div class="timeline">
+            <div class="timeline-item">
+                <h2>2022</h2>
+                <p>Won the National Robotics Championship.</p>
+            </div>
+            <div class="timeline-item">
+                <h2>2021</h2>
+                <p>Launched our first combat robot, Titan-X.</p>
+            </div>
+            <!-- Add more items as needed -->
+        </div>
+    </section>
+    <section id="achievements">
+        <h1>Our Achievements</h1>
+        <div class="counters">
+            <div class="counter" data-target="20">0</div>
+            <p>Awards Won</p>
+        </div>
+        <div class="counters">
+            <div class="counter" data-target="10">0</div>
+            <p>Robots Built</p>
+        </div>
+    </section>
+    <section id="leaderboard">
+        <h1>Leaderboard & Awards</h1>
+        <input type="text" id="searchBar" placeholder="Search by Competition or Year">
+        <table>
+            <thead>
+                <tr>
+                    <th>Year</th>
+                    <th>Competition</th>
+                    <th>Rank</th>
+                    <th>Award</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2023</td>
+                    <td>International Robotics League</td>
+                    <td>1st Place</td>
+                    <td>Gold Trophy</td>
+                </tr>
+                <tr>
+                    <td>2022</td>
+                    <td>National Robotics Championship</td>
+                    <td>2nd Place</td>
+                    <td>Silver Medal</td>
+                </tr>
+                <tr>
+                    <td>2021</td>
+                    <td>TechFest Robotics Competition</td>
+                    <td>3rd Place</td>
+                    <td>Bronze Award</td>
+                </tr>
+                <tr>
+                    <td>2020</td>
+                    <td>Statewide Robotics Meet</td>
+                    <td>1st Place</td>
+                    <td>Innovation Cup</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    
+    <footer>
+        <p>&copy; 2024 Team Combat Robotics. All Rights Reserved.</p>
+        <a href="https://in.linkedin.com/company/team-combat-robotics-manipal" target="_blank">LinkedIn</a>
+        <a href="https://www.instagram.com/teamcombatrobotics/" target="_blank">Instagram</a>
+    </footer>
+    <script>
+        // Function to animate counters
+const animateCounter = (counter) => {
+    const updateCount = () => {
+        const target = +counter.getAttribute('data-target'); // Target value
+        const count = +counter.innerText; // Current value
+        const increment = target / 3000; // Adjust divisor for slower speed
+
+        if (count < target) {
+            counter.innerText = Math.ceil(count + increment);
+            setTimeout(updateCount, 200); // Slower updates every 20ms
+        } else {
+            counter.innerText = target; // Ensure it reaches the target
+        }
+    };
+    updateCount();
+};
+
+// Intersection Observer to trigger the counter animation
+const observer = new IntersectionObserver(
+    (entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const counters = entry.target.querySelectorAll('.counter');
+                counters.forEach(counter => animateCounter(counter));
+                observer.unobserve(entry.target); // Stop observing once triggered
+            }
+        });
+    },
+    {
+        threshold: 1.0 // Element must be fully visible to trigger
+    }
+);
+
+// Attach observer to the counter section
+document.addEventListener('DOMContentLoaded', () => {
+    const counterSection = document.getElementById('achievements');
+    if (counterSection) observer.observe(counterSection);
+});
+
+        </script>
+        
+        <script src="leaderboard.js" defer></script>
+        <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+        <script src="scripts/particles-config.js"></script>
+
+
+</body>
+</html>
