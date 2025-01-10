@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Team</title>
+    <link rel="stylesheet" href="style.css"> <!-- Link the existing CSS file -->
+    <style>
+        /* Team Section */
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #121212; /* Matte Black */
+            color: #ffffff;
+        }
+#team-section {
+    padding: 50px 20px;
+    background: #121212;
+    color: #ffffff;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    color: #e50914;
+    margin-bottom: 30px;
+}
+
+.team-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.team-member {
+    flex: 0 0 calc(25% - 20px); /* 4 cards per row, adjusts for spacing */
+    background: #1a1a1a;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.team-member img {
+    width: 100%;
+    max-width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.team-member h3 {
+    font-size: 1.2rem;
+    color: #e50914;
+    margin-bottom: 5px;
+}
+
+.team-member p {
+    font-size: 0.9rem;
+    color: #ffffff;
+}
+
+.team-member:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
+}
+
+        </style>
+</head>
+<body>
+    <header>
+        <img id="college-symbol" src="images/college-symbol.png" alt="College Symbol" id="logo">
+        <nav>
+            <a href="index.html">Home</a>
+           
+        </nav>
+    </header>
+
+    <section id="team-section">
+        <h2 class="section-title">Meet Our Team</h2>
+        <div class="team-container">
+            <div class="team-member">
+                <img src="images/member1.jpg" alt="Team Member 1">
+                <h3>Anmol</h3>
+                <p>Team Leader</p>
+            </div>
+            <div class="team-member">
+                <img src="images/member2.jpg" alt="Team Member 2">
+                <h3>Rathinakumar</h3>
+                <p>Mechanical Engineer</p>
+            </div>
+            <div class="team-member">
+                <img src="images/member3.jpg" alt="Team Member 3">
+                <h3>Ishika</h3>
+                <p>Software Developer</p>
+            </div>
+            <div class="team-member">
+                <img src="images/member4.jpg" alt="Team Member 4">
+                <h3>Mrunal</h3>
+                <p>Management</p>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

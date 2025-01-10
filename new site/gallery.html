@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - Team Combat Robotics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #121212; /* Matte Black */
+            color: #ffffff;
+        }
+        header {
+            background: linear-gradient(90deg, #2c2c2c, #121212);
+            padding: 20px;
+            text-align: center;
+        }
+        header h1 {
+            color: #e50914;
+        }
+        .gallery-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 20px;
+            justify-content: center;
+        }
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .gallery-item .title-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.6); /* Transparent background */
+            color: #ffffff;
+            text-align: center;
+            font-size: 1em;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+        .gallery-item:hover .title-overlay {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Gallery</h1>
+    </header>
+    <section class="gallery-container">
+        <div class="gallery-item" style="width: 300px;">
+            <img id="image1" src="images/image1.jpg" alt="Image 1">
+            <div class="title-overlay">Techtatva 24</div>
+        </div>
+        <div class="gallery-item" style="width: 250px;">
+            <img src="image2.jpg" alt="Image 2">
+            <div class="title-overlay">Title 2</div>
+        </div>
+        <div class="gallery-item" style="width: 350px;">
+            <img src="image3.jpg" alt="Image 3">
+            <div class="title-overlay">Title 3</div>
+        </div>
+        <div class="gallery-item" style="width: 400px;">
+            <img src="image4.jpg" alt="Image 4">
+            <div class="title-overlay">Title 4</div>
+        </div>
+    </section>
+</body>
+</html>
